@@ -1,0 +1,46 @@
+<div class="new-game-form">
+  <h1>Add a new game</h1>
+  <br>
+  <%= form_with(model: game, local:true) do |f|%>
+
+    <div class="field">
+      <p>Title</p>
+      <%= f.text_field :title, presence: true %>
+    </div>
+
+    <div class="field field-about">
+      <p>About game</p>
+      <%= f.text_field :about, presence: true  %>
+    </div>
+
+    <div class="field">
+      <p>Release date</p>
+      <%= f.text_field :release_date, presence: true %>
+    </div>
+
+<!--    <div class="field">-->
+<!--      <p>Genre (Add with space between them)</p>-->
+      <%#= f.text_field :genre_list, presence: true %>
+<!--    </div>-->
+
+    <div class="field">
+      <p>Developer</p>
+      <%= f.collection_select :developer_id, Developer.order(:name),:id,:name, include_blank: true, presence: true %>
+    </div>
+
+    <div class="field">
+      <p>Franchise</p>
+      <%= f.collection_select :franchise_id, Franchise.order(:name),:id,:name, include_blank: true, presence: true  %>
+    </div>
+
+    <div class="field">
+      <p>Platform</p>
+      <%= f.collection_select :platform_id, Platform.order(:name),:id,:name, include_blank: true, presence: true  %>
+    </div>
+
+    <div class="actions new-g">
+    <%= f.submit "Create" %>
+    </div>
+
+  <% end %>
+</div>

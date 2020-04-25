@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GameStore</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'navbar' %>
+    <%= stylesheet_link_tag 'footer' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render "layouts/navbar" %>
+
+<!--    DEVISE ALERT-->
+<!--    <p class="notice"><%#= notice %></p>-->
+<!--    <p class="alert"><%#= alert %></p>-->
+
+    <%= yield %>
+
+    <%= render "layouts/footer" %>
+  </body>
+
+</html>

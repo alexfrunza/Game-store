@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  about: MyText
+  stock: 1
+  release_date: MyString
+  developer: one
+  game_type: one
+  franchise: one
+  platform: one
+
+two:
+  title: MyString
+  about: MyText
+  stock: 1
+  release_date: MyString
+  developer: two
+  game_type: two
+  franchise: two
+  platform: two

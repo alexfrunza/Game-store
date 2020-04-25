@@ -1,0 +1,29 @@
+<nav class="navbar">
+  <ul>
+    <li>
+      <%= link_to('GameStore', "/", class: "name") %>
+    </li>
+    <li class="actions">
+      <%= link_to('About', "/about") %>
+    </li>
+
+    <% if user_signed_in? %>
+
+      <li class="actions">
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      </li>
+
+    <% else %>
+
+      <li class="actions">
+        <%= link_to('Register', new_user_registration_path) %>
+      </li>
+      <li class="actions">
+        <%= link_to('Login', new_user_session_path) %>
+      </li>
+
+    <% end %>
+
+<!--    <li class="actions"><a href="#">Log in</a></li>-->
+  </ul>
+</nav>

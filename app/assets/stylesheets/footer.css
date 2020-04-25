@@ -1,0 +1,13 @@
+footer {
+    margin-top: 50px;
+    padding: 30px;
+    text-align: center;
+    background-color: #333333;
+    color: #FF4500;
+    font-size: 20px;
+}
+
+footer a:link, a:visited {
+    text-decoration: none;
+    color: #FF4500;
+}
