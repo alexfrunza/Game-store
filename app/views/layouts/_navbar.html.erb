@@ -13,6 +13,14 @@
         <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
       </li>
 
+      <% if current_user.admin? %>
+
+        <li class="actions">
+          <%= link_to('Add a new game', "/games/new") %>
+        </li>
+
+      <% end %>
+
     <% else %>
 
       <li class="actions">
