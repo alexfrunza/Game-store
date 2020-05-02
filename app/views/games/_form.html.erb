@@ -18,10 +18,16 @@
       <%= f.text_field :release_date, presence: true %>
     </div>
 
-<!--    <div class="field">-->
-<!--      <p>Genre (Add with space between them)</p>-->
-      <%#= f.text_field :genre_list, presence: true %>
-<!--    </div>-->
+    <div class="field">
+      <p>Genre</p>
+      <%= f.collection_check_boxes :game_type_ids, GameType.all, :id, :name do |b| %>
+        <div class="collection-check-box">
+          <%= b.label %>
+          <%= b.check_box %>
+        </div>
+      <% end %>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br>
 
     <div class="field">
       <p>Developer</p>
@@ -36,6 +42,20 @@
     <div class="field">
       <p>Platform</p>
       <%= f.collection_select :platform_id, Platform.order(:name),:id,:name, include_blank: true, presence: true  %>
+    </div>
+
+    <div class="field">
+      <p>Rarity</p>
+      <%= f.collection_select :rarity_id, Rarity.order(:id),:id,:name, include_blank: true, presence: true  %>
+    </div>
+
+    <div class="field">
+      <p>Stock</p>
+      <%= f.number_field :stock, presence: true %>
+    </div>
+
+    <div class="error-field">
+      <%= game.errors.messages.first[1][0] if game.errors.any? %>
     </div>
 
     <div class="actions new-g">

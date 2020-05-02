@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_074230) do
+ActiveRecord::Schema.define(version: 2020_05_01_064818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,11 @@ ActiveRecord::Schema.define(version: 2020_04_26_074230) do
     t.bigint "platform_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "rarity_id", null: false
     t.index ["developer_id"], name: "index_games_on_developer_id"
     t.index ["franchise_id"], name: "index_games_on_franchise_id"
     t.index ["platform_id"], name: "index_games_on_platform_id"
+    t.index ["rarity_id"], name: "index_games_on_rarity_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -63,7 +65,25 @@ ActiveRecord::Schema.define(version: 2020_04_26_074230) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status"
+    t.datetime "returned_time"
+    t.datetime "return_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_orders_on_game_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "platforms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rarities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -85,4 +105,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_074230) do
   add_foreign_key "games", "developers"
   add_foreign_key "games", "franchises"
   add_foreign_key "games", "platforms"
+  add_foreign_key "games", "rarities"
+  add_foreign_key "orders", "games"
+  add_foreign_key "orders", "users"
 end

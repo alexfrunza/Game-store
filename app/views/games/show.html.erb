@@ -1,0 +1,18 @@
+
+<div class="page" id="left">
+</div>
+
+<div class="page" id="center">
+  <h1> <%= @game.title %> </h1>
+  <h2> <%= @game.about %> </h2>
+  <h2> Genre: <%= showGenre(@game) %> </h2>
+  <h2> Developer: <%= @game.developer.name %></h2>
+  <h2> Franchise: <%= @game.franchise.name %></h2>
+  <h2> Release Date: <%= @game.release_date %></h2>
+  <h2> Rarity: <%= @game.rarity.name %></h2>
+  <h2> Current games in stock: <%= @game.stock %></h2>
+</div>
+
+<div class="page" id="right">
+
+</div>
