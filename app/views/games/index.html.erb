@@ -1,21 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<br>
 
-  <head>
-      <meta charset="UTF-8">
-      <title>Home</title>
-  </head>
+<div class="rows">
+  <div class="column-left">
+    <%= simple_form_for :search, :method => 'get', :url => games_path, :html => {:class => 'form-filter-sys'} do |f| %>
+      <div class="field">
+        <%= f.input :developer, label:"Developer", :label_html => { :class => 'label-index' }, collection: developers, as: :check_boxes %>
+      </div>
 
-  <body>
-    <h1>
-      THIS IS HOME PAGE
-    </h1>
-  <br><br><br>
+      <div class="field">
+        <%= f.input :platform, label:"Platform", :label_html => { :class => 'label-index' }, collection: platforms, as: :check_boxes %>
+      </div>
 
-  <% @games.each do |game| %>
-     Game: <%= game.title %> <br>
+      <div class="field">
+        <%= f.input :game_type, label:"Genre", :label_html => { :class => 'label-index' }, collection: game_types, as: :check_boxes %>
+      </div>
+
+      <div class="field">
+        <%= f.input :franchise, label:"Franchise", :label_html => { :class => 'label-index' }, collection: franchises, as: :check_boxes %>
+      </div>
+
+      <div class="field">
+        <%= f.input :rarity, label:"Rarity", :label_html => { :class => 'label-index' }, collection: rarities, class: "random", as: :check_boxes%>
+      </div>
+
+      <%= submit_tag "Search", class: "back-b2" %>
+      <%= link_to "Reset", games_path, class: "back-b2" %>
     <% end %>
+  </div>
 
-  </body>
+  <div class="column-center">
+    <div class="game-list-div">
+      <% @games.each do |game|%>
+        <% if game.stock > 0 %>
+          <div class="game-in-list">
 
-</html>
+            <div class="item">
+              <img class="resize" src="<%= game.photo_url %>" alt="Photo loading...">
+            </div>
+
+            <div class="item">
+              <h3><%= game.title %></h3>
+            </div>
+
+            <%= link_to('Show', game_path(:id => game.id), class: "game-action") %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="column-left">
+
+  </div>
+</div>

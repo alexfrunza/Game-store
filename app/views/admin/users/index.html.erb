@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+<div class="game-list-div">
+
+  <div class="back-b-div">
+    <%= link_to 'Back', admin_index_path, class: "back-b2" %>
+  </div>
+
+  <div class="divider"></div>
+  <div class="divider"></div>
+  <div class="divider"></div>
+
+  <% @users.each do |user|%>
+    <div class="game-in-list">
+
+      <div class="item">
+        <h3><%= user.email %></h3>
+      </div>
+      <div class="item">
+        <% if user.admin %>
+          <h3 class="admin-text"> - This user is ADMIN</h3>
+        <% end %>
+      </div>
+
+      <% if current_user.id == user.id %>
+        <h3 class="you"> YOU </h3>
+      <% elsif user.admin == false %>
+        <%= link_to('Make Admin', make_admin_path(:id => user.id), method: :put, class: "user-action", data: { confirm: "You sure?" }) %>
+        <%= link_to('Destroy', admin_destroy_user_path(:id => user.id), method: :delete, class: "user-action", data: { confirm: "You sure?" }) %>
+      <% else %>
+        <%= link_to('Remove Admin', remove_admin_path(action: "remove_admin",:id => user.id), method: :put, class: "user-action", data: { confirm: "You sure?" }) %>
+      <% end %>
+
+
+    </div>
+  <% end %>
+
+</div>
+</body>
+
+</html>

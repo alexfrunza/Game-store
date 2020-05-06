@@ -3,14 +3,31 @@
 </div>
 
 <div class="page" id="center">
-  <h1> <%= @game.title %> </h1>
+
+  <div class="presentation">
+    <img src="<%= @game.photo_url %>" alt="Photo loading...">
+  </div>
+
+  <div class="presentation">
+    <h1> <%= @game.title %> </h1>
+  </div>
+
   <h2> <%= @game.about %> </h2>
-  <h2> Genre: <%= showGenre(@game) %> </h2>
-  <h2> Developer: <%= @game.developer.name %></h2>
-  <h2> Franchise: <%= @game.franchise.name %></h2>
-  <h2> Release Date: <%= @game.release_date %></h2>
-  <h2> Rarity: <%= @game.rarity.name %></h2>
-  <h2> Current games in stock: <%= @game.stock %></h2>
+
+  <div class="desc" id="left2">
+    <h2> Genre: <%= showGenre(@game) %> </h2>
+    <h2> Developer: <%= @game.developer.name %></h2>
+    <h2> Franchise: <%= @game.franchise.name %></h2>
+    <h2> Release Date: <%= @game.release_date %></h2>
+    <h2> Platform: <%= @game.platform.name %></h2>
+    <h2> Rarity: <%= @game.rarity.name %></h2>
+    <h2> Current games in stock: <%= @game.stock %></h2>
+  </div>
+
+  <div class="desc" id="right2">
+    <iframe width=640px height=360px src="<%= @game.video_url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
 </div>
 
 <div class="page" id="right">

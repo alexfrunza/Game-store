@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+  <div class="game-list-div">
+
+    <div class="back-b-div">
+      <%= link_to 'Back', admin_index_path, class: "back-b2" %>
+    </div>
+
+    <div class="divider"></div>
+    <%= link_to('Add a new game', "/games/new", class: "new-game-button") %>
+    <div class="divider"></div>
+    <div class="divider"></div>
+
+    <% @games.each do |game|%>
+    <div class="game-in-list">
+
+      <div class="item">
+        <img class="resize" src="<%= game.photo_url %>" alt="Photo loading...">
+      </div>
+
+      <div class="item">
+        <h3><%= game.title %></h3>
+      </div>
+
+      <%= link_to('Delete', game_path(:id => game.id), method: :delete, class: "game-action") %>
+
+      <%= link_to('Edit', edit_game_path(:id => game.id), class: "game-action") %>
+
+      <%= link_to('Show', game_path(:id => game.id), class: "game-action") %>
+
+    </div>
+    <% end %>
+
+  </div>
+</body>
+
+</html>

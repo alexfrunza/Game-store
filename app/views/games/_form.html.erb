@@ -1,5 +1,5 @@
 <div class="new-game-form">
-  <h1>Add a new game</h1>
+  <h1><%= title_form %></h1>
   <br>
   <%= form_with(model: game, local:true) do |f|%>
 
@@ -54,12 +54,26 @@
       <%= f.number_field :stock, presence: true %>
     </div>
 
+    <div class="field">
+      <p>Photo url</p>
+      <%= f.text_field :photo_url, presence: true %>
+    </div>
+
+    <div class="field">
+      <p>Video code from youtube</p>
+      <%= f.text_field :video_url, presence: true %>
+    </div>
+
     <div class="error-field">
-      <%= game.errors.messages.first[1][0] if game.errors.any? %>
+      <%= game.errors.full_messages.first if game.errors.any? %>
+    </div>
+
+    <div class="back-b-div new-g2">
+      <%= link_to 'Back', admin_games_path, class: "back-b" %>
     </div>
 
     <div class="actions new-g">
-    <%= f.submit "Create" %>
+    <%= f.submit button_text %>
     </div>
 
   <% end %>

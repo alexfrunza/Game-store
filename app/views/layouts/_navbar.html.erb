@@ -16,7 +16,7 @@
       <% if current_user.admin? %>
 
         <li class="actions">
-          <%= link_to('Add a new game', "/games/new") %>
+          <%= link_to('Admin Panel', admin_index_path) %>
         </li>
 
       <% end %>
@@ -32,6 +32,11 @@
 
     <% end %>
 
-<!--    <li class="actions"><a href="#">Log in</a></li>-->
+    <li class="actions">
+      <%= link_to('All Games', games_path) %>
+    </li>
+
+
+    <!--    <li class="actions"><a href="#">Log in</a></li>-->
   </ul>
 </nav>
