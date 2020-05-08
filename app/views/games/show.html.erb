@@ -22,6 +22,24 @@
     <h2> Platform: <%= @game.platform.name %></h2>
     <h2> Rarity: <%= @game.rarity.name %></h2>
     <h2> Current games in stock: <%= @game.stock %></h2>
+
+    <% if current_user %>
+      <% if order_status_active(@game) %>
+        <%= link_to('Return game', return_game_path, method: :put, class: "back-b") %>
+        <%= link_to('Play game', '#', class: "back-b") %>
+      <% else %>
+        <% if current_user.borrowed_games >= 3 %>
+          <h1 class="warning"> You cannot have more than 3 games borrowed at the same time </h1>
+        <% elsif @game.stock == 0 %>
+          <h1 class="warning"> This game is not in stock! </h1>
+        <% else %>
+          <%= link_to('Borrow game', borrow_game_path, method: :post, class: "back-b") %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <h1 class="warning"> You need to login to borow a game</h1>
+    <% end %>
+
   </div>
 
   <div class="desc" id="right2">
@@ -31,5 +49,4 @@
 </div>
 
 <div class="page" id="right">
-
 </div>

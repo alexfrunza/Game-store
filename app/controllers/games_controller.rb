@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :destroy, :edit, :update]
+  before_action :set_game, only: [:show, :destroy, :edit, :update, :borrow_game, :return_game]
   before_action :require_admin, only: [:new, :create, :destroy, :edit, :update]
+  before_action :verify_num_borrowed_games, only: [:borrow_game]
+  before_action :verify_stock, only: [:borrow_game]
 
   def index
     @games = Game.all
@@ -58,7 +60,60 @@ class GamesController < ApplicationController
     redirect_to admin_games_path
   end
 
+  def borrow_game
+    if user_signed_in?
+      @order = Order.new
+      @order.game_id = @game.id
+      @order.user_id = current_user.id
+      @order.status = "active"
+      @order.return_time = Time.now + 5.minutes
+      @game.stock -= 1
+      current_user.borrowed_games += 1
+      current_user.save
+      @game.save
+      @order.save
+      redirect_to "/games/#{@game.id}"
+    else
+      redirect_to "/games/#{@game.id}"
+    end
+  end
+
+  def return_game
+    if user_signed_in?
+      @order = Order.where(game_id: @game.id, user_id: current_user.id).last
+      if @order
+        @order.returned_time = Time.now
+        if @order.returned_time <= @order.return_time
+          @order.returned_at_time = true
+        end
+        @order.status = "completed"
+        @game.stock += 1
+        current_user.borrowed_games -= 1
+        current_user.save
+        @game.save
+        @order.save
+        redirect_to "/games/#{@game.id}"
+      else
+        redirect_to "/games/#{@game.id}"
+      end
+    else
+      redirect_to "/games/#{@game.id}"
+    end
+  end
+
   private
+  def verify_stock
+    if @game.stock == 0
+      redirect_to "/games/#{@game.id}"
+    end
+  end
+
+  def verify_num_borrowed_games
+    if current_user.borrowed_games >= 3
+      redirect_to "/games/#{@game.id}"
+    end
+  end
+
   def make_url_for_youtube
     @game.video_url = "https://www.youtube.com/embed/" + @game.video_url
   end

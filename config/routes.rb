@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   put 'user/:id/make_admin' => 'users#make_admin', :as => "make_admin"
   put 'user/:id/remove_admin' => 'users#remove_admin', :as => "remove_admin"
 
+  post 'games/:id/borrow_game' => 'games#borrow_game', :as => "borrow_game"
+  put 'games/:id/return_game' => 'games#return_game', :as => "return_game"
+
   root to: 'home#index'
-  resources :games, :about, :items
+  resources :games, :about, :items, :account
   resources :admin, only: [:index]
 
   namespace :admin do

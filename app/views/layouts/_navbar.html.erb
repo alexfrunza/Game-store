@@ -13,6 +13,10 @@
         <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
       </li>
 
+      <li class="actions">
+        <%= link_to(current_user.username, account_index_path) %>
+      </li>
+
       <% if current_user.admin? %>
 
         <li class="actions">

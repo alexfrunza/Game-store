@@ -1,0 +1,69 @@
+<div class="game-list-div">
+
+  <div class="back-b-div">
+    <%= link_to 'Change your password', edit_user_registration_path, class: "back-b2" %>
+  </div>
+
+  <div class="divider"></div>
+  <h1> Welcome, <%= current_user.username %> </h1>
+  <h3 class="congrats"> You returned <%= games_returned_at_time %> at time</h3>
+  <div class="divider"></div>
+  <div class="divider"></div>
+  <h2> Active Orders</h2>
+
+  <% unless @orders_active.to_a.empty? %>
+    <% @orders_active.each do |order|%>
+      <div class="game-in-list">
+
+        <div class="item">
+          <img class="resize" src="<%= game(order.game_id).photo_url %>" alt="Photo loading...">
+        </div>
+
+        <div class="item">
+          <h3><%= game(order.game_id).title %></h3>
+        </div>
+
+        <%= link_to('Show', game_path(:id => game(order.game_id)), class: "game-action") %>
+
+        <div >
+          <h3 class="warning"> - Borrowed game at: <%= order.created_at %></h3>
+        </div>
+
+        <div >
+          <h3 class="warning"> - Return until: <%= order.return_time %></h3>
+        </div>
+
+      </div>
+    <% end %>
+  <% else %>
+    <h2> You have no active orders </h2>
+  <% end %>
+
+  <div class="divider"></div>
+  <h2> Completed Orders </h2>
+
+  <% unless @orders_complete.to_a.empty? %>
+    <% @orders_complete.each do |order|%>
+      <div class="game-in-list">
+
+        <div class="item">
+          <img class="resize" src="<%= game(order.game_id).photo_url %>" alt="Photo loading...">
+        </div>
+
+        <div class="item">
+          <h3><%= game(order.game_id).title %></h3>
+        </div>
+
+        <%= link_to('Show', game_path(:id => game(order.game_id)), class: "game-action") %>
+
+        <div >
+          <h3 class="warning"> - You returned this game at: <%= order.returned_time %></h3>
+        </div>
+
+      </div>
+    <% end %>
+  <% else %>
+    <h2> You have no completed orders </h2>
+  <% end %>
+
+</div>
