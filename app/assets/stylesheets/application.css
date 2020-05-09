@@ -411,3 +411,23 @@ div.page h1 {
 .congrats {
     color: #026440;
 }
+
+.games-ll {
+    text-align: center;
+}
+
+.game-showcase {
+    border: 3px solid gray;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 20px;
+}
+
+.resize2 {
+    height: 150px;
+    width: auto;
+}
+
+.game-action2 {
+    float: none !important;
+}

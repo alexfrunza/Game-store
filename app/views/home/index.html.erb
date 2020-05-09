@@ -1,1 +1,29 @@
-<h1>Home page</h1>
+<br>
+
+<div class="page" id="left">
+
+</div>
+
+<div class="page" id="center">
+  <h1>Welcome to GameStore</h1>
+  <div class="divider"></div>
+  <div class="games-ll">
+    <h2>Recently added games</h2>
+    <% @recent_games.each do |game| %>
+      <div class="game-showcase">
+        <img src="<%= game.photo_url %>" alt="Photo loading..." class="resize2">
+        <h2> <%= game.title %></h2>
+        <h2> Stock: <%= game.stock %></h2>
+        <div class="divider"></div>
+        <%= link_to('Show', game_path(:id => game.id), class: "game-action game-action2") %>
+        <div class="divider"></div>
+      </div>
+    <% end %>
+    <div class="divider"></div>
+    <div class="divider"></div>
+    <div class="divider"></div>
+    <%= link_to('Show all games', games_path, class: "game-action game-action2") %>
+  </div>
+</div>
+
+<div class="page" id="right"></div>
