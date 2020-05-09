@@ -5,6 +5,17 @@ class GamesController < ApplicationController
   before_action :verify_stock, only: [:borrow_game]
 
   def index
+
+    seedfile = File.open('db/seeds.rb', 'a')
+
+    @c = Rarity.all
+
+    @c.each do |cat|
+      seedfile.write "Rarity.create(#{cat.attributes})\n"
+    end
+
+    seedfile.close
+
     @games = Game.all
     if params["search"]
       @filter = params["search"]["platform"]
