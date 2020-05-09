@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: ror_production
   username: ror
   password: <%= ENV['ROR_DATABASE_PASSWORD'] %>
