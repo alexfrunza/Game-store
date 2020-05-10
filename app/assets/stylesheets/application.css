@@ -431,3 +431,21 @@ div.page h1 {
 .game-action2 {
     float: none !important;
 }
+
+.field2 {
+    vertical-align: center;
+    /*border: 2px solid grey;*/
+}
+
+.field2 input {
+    margin-top: -10px !important;
+    margin-bottom: 0px !important;
+}
+
+.game-action3 {
+    padding: 20px !important;
+}
+
+.navbar {
+    vertical-align: center;
+}

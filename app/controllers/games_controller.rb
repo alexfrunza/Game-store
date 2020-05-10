@@ -6,6 +6,13 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+
+    @search = params["search_bar"]
+    if @search.present?
+      @title = @search["title"]
+      @games = Game.where("title ILIKE ?", "%#{@title}%")
+    end
+
     if params["search"]
       @filter = params["search"]["platform"]
                     .concat(params["search"]["game_type"])
@@ -16,8 +23,6 @@ class GamesController < ApplicationController
       @filter.each do |filter|
         @games = @games.tagged_with(filter, any: true)
       end
-    else
-      @games = Game.all
     end
   end
 

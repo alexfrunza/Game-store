@@ -3,6 +3,16 @@
     <li>
       <%= link_to('GameStore', "/", class: "name") %>
     </li>
+
+    <%= simple_form_for :search_bar, url: games_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+      <li class="field field2">
+      <%= f.input :title, input_html: {value: ""} %>
+      </li>
+      <li>
+      <%= f.submit "Search", class: "game-action game-action2 game-action3" %>
+      </li>
+    <% end %>
+
     <li class="actions">
       <%= link_to('About', "/about") %>
     </li>
