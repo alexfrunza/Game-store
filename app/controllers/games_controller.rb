@@ -56,6 +56,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
+    Order.where(game_id: @game.id).map(&:destroy)
     @game.destroy
     redirect_to admin_games_path
   end
@@ -92,13 +93,9 @@ class GamesController < ApplicationController
         current_user.save
         @game.save
         @order.save
-        redirect_to "/games/#{@game.id}"
-      else
-        redirect_to "/games/#{@game.id}"
       end
-    else
-      redirect_to "/games/#{@game.id}"
     end
+    redirect_to "/games/#{@game.id}"
   end
 
   private

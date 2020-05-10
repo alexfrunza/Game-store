@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:destroy, :make_admin, :remove_admin]
 
   def destroy
+    Order.where(user_id: @user.id).map(&:destroy)
     @user.destroy
     redirect_to admin_users_path
   end
