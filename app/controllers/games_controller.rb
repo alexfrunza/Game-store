@@ -37,7 +37,7 @@ class GamesController < ApplicationController
       add_tags
       make_url_for_youtube
       @game.save
-      redirect_to "/games/#{@game.id}"
+      redirect_to game_path(:id => @game.id)
     else
       render "/games/#{@game.id}/edit"
     end
@@ -73,10 +73,8 @@ class GamesController < ApplicationController
       current_user.save
       @game.save
       @order.save
-      redirect_to "/games/#{@game.id}"
-    else
-      redirect_to "/games/#{@game.id}"
     end
+    redirect_to game_path(:id => @game.id)
   end
 
   def return_game
@@ -95,19 +93,19 @@ class GamesController < ApplicationController
         @order.save
       end
     end
-    redirect_to "/games/#{@game.id}"
+    redirect_to game_path(:id => @game.id)
   end
 
   private
   def verify_stock
     if @game.stock == 0
-      redirect_to "/games/#{@game.id}"
+      redirect_to game_path(:id => @game.id)
     end
   end
 
   def verify_num_borrowed_games
     if current_user.borrowed_games >= 3
-      redirect_to "/games/#{@game.id}"
+      redirect_to game_path(:id => @game.id)
     end
   end
 

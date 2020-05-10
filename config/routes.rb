@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   put 'games/:id/return_game' => 'games#return_game', :as => "return_game"
 
   root to: 'home#index'
-  resources :games, :about, :items, :account
+  resources :games, :about, :account
   resources :admin, only: [:index]
 
   namespace :admin do
